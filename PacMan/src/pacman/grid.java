@@ -1,3 +1,4 @@
+package pacman;
 public class grid {
 	private static int Width, Height;
 	
