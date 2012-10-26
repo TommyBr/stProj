@@ -1,10 +1,16 @@
 package pacman;
+import static org.junit.Assert.*;
 
 public class grid {
 	private static int Width, Height;
 	private static gridValues gv[];
 	
+	public grid() {
+		
+	}
+	
 	public static int initGrid(int width, int height) {
+		assertTrue(width > 0 && height > 0); 
 		Width = width;
 		Height = height;
 		gv = new gridValues[width * height]; 
