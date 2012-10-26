@@ -6,9 +6,13 @@ import pacman.grid;
 public class TUI {
 
 	Scanner scanner;
+	grid g;
 	
 	public TUI() {
-		grid.drawGrid();
+		System.out.println("PacMan gestartet");
+		g = new grid();
+		g.initGrid(10, 6);
+		g.drawGrid();
 		scanner = new Scanner(System.in);
 		printInstructions();
 	}
@@ -17,7 +21,7 @@ public class TUI {
 		String s = scanner.next();
 		
 		if (s.charAt(0) == 'q') {
-			System.out.println("exit");
+			System.out.println("quit");
 			return 1;
 		}
 		
@@ -25,6 +29,7 @@ public class TUI {
 	}
 	
 	public void printInstructions() {
+		System.out.println("P = PacMan, G = Geist");
 		System.out.println("Befehle: q = quit");
 	}
 }
