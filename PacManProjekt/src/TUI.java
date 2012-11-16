@@ -1,39 +1,38 @@
 import java.util.Scanner;
 
 public class TUI {
-
 	Scanner scanner;
-	grid g;
+	static grid g;
 	
 	public TUI() {
 		System.out.println("PacMan gestartet");
 		g = new grid();
 		g.initGrid(10, 6);
 		g.drawGrid();
-		scanner = new Scanner(System.in);
 		printInstructions();
+		scanner = new Scanner(System.in);
 	}
 	
-	boolean moveIsAllowed(int from, int to) {	
-		//ausserhalb des Grid?
+	static boolean moveIsAllowed(int from, int to) {	
+		//make sure to move within the limit of the grid
 		if (from < 0 || to < 0 || from >= g.getHeight() * g.getWidth()
 				|| to >= g.getHeight() * g.getWidth()) return false;
 		
-		//Ziel eine Wand?
+		//is the destination field a wall?
 		if (g.isWall(to)) return false;
 		
-		//linke Wand vom Grid erreicht?
-		if (to == from - 1 && g.getPlayer() % g.getWidth() == 0) return false;
+		//left Wand vom Grid erreicht?
+		if (to == from - 1 && from % g.getWidth() == 0) return false;
 		
-		//rechte Wand vom Grid erreicht?
-		if (to - 1 == from && g.getPlayer() % g.getWidth() == g.getWidth() - 1) return false;
+		//right border from the grid eached?
+		if (to - 1 == from && from % g.getWidth() == g.getWidth() - 1) return false;
 				
-		//obere Wand vom Grid erreicht?
+		//top border from the grid eached?
 		if (to < 0) {
 			return false;
 		}
 				
-		//obere Wand vom Grid erreicht?
+		//bottom border from the grid eached?
 		if (to >= g.getHeight() * g.getWidth()) {
 			return false;
 		}
@@ -42,6 +41,7 @@ public class TUI {
 	}
 	
 	public int run() {
+		//read the ASCII input from the console
 		String s = scanner.next();
 		
 		if (s.charAt(0) == 'q') {
@@ -49,7 +49,7 @@ public class TUI {
 			return 1;
 		}
 		
-		//lach links bewegen
+		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) return -1;
 			g.setPlayer(g.getPlayer() - 1);
@@ -58,7 +58,7 @@ public class TUI {
 			return 0;
 		}
 		
-		//lach rechts bewegen
+		//move right
 		if (s.charAt(0) == 'd') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) return -1;
 			g.setPlayer(g.getPlayer() + 1);
@@ -67,7 +67,7 @@ public class TUI {
 			return 0;
 		}
 
-		//lach oben bewegen
+		//move up
 		if (s.charAt(0) == 'w') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) return -1;
 			g.setPlayer(g.getPlayer() - g.getWidth());
@@ -76,7 +76,7 @@ public class TUI {
 			return 0;
 		}
 
-		//lach unten bewegen
+		//move down
 		if (s.charAt(0) == 's') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) return -1;
 			g.setPlayer(g.getPlayer() + g.getWidth());
@@ -89,6 +89,10 @@ public class TUI {
 	}
 	
 	public void printInstructions() {
+		/*
+		 	Instruction for the user to play the game.
+		 	The following lines will be printed after every move done by the user.
+		*/
 		System.out.println("P = PacMan, G = Geist, x = Wand");
 		System.out.println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}
