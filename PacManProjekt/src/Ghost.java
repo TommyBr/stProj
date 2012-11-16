@@ -3,7 +3,7 @@ public class Ghost {
 	static final int THREE = 3, FOUR = 4, THOUSAND = 1000;
 	private static int pos, directory;
 
-	public Ghost() {
+	Ghost() {
 		//default directory - none
 		directory = -1;
 	}
@@ -50,7 +50,7 @@ public class Ghost {
 		chooseDirection();
 		
 		//delete the old ghost position from the grid
-		if (Grid.gv[pos] != null) Grid.gv[pos].ghost = false;
+		if (Grid.getGridValue(pos) != null) { Grid.getGridValue(pos).ghost = false; }
 		
 		switch (directory) {
 		case 0:
@@ -75,8 +75,8 @@ public class Ghost {
 		}
 		
 		//set the new ghost position to the grid
-		if (Grid.gv[pos] == null) Grid.gv[pos] = new GridValues(); 
-		Grid.gv[pos].ghost = true;
+		if (Grid.getGridValue(pos) == null) { Grid.createGridValue(pos); }
+		Grid.getGridValue(pos).ghost = true;
 	}
 	
 	//returns the position of the ghost

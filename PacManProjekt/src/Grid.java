@@ -2,7 +2,7 @@ public class Grid {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, THOUSAND = 1000;
 	private static int width, height, player;
-	public static GridValues gv[];
+	private static GridValues gv[];
 	private static Ghost ghost;
 	//number of eaten food (clear fields)
 	private static int eaten;
@@ -14,13 +14,20 @@ public class Grid {
 		eaten = 0;
 	}
 	
+	static GridValues getGridValue(int idx) {
+		return gv[idx];
+	}
+	
+	static void createGridValue(int idx) {
+		gv[idx] = new GridValues();
+	}
 	static int getEaten() {
 		return eaten;
 	}
 	
 	void placeWall(int idx) {
 		//create a new GridValue for the wall
-		if (gv[idx] == null) gv[idx] = new GridValues();
+		if (gv[idx] == null) { gv[idx] = new GridValues(); }
 		//mark this field as a wall
 		gv[idx].isWall = true;	
 		//you can't eat a wall
@@ -92,20 +99,20 @@ public class Grid {
 	
 	//returns true if the field "idx" is a wall
 	public boolean isWall(int idx) {
-		if (gv[idx] != null && gv[idx].isWall) return true;
+		if (gv[idx] != null && gv[idx].isWall) { return true; }
 		return false;
 	}
 	
 	public void setPlayer(int pos) {
 		//make sure the player moving inside the grid
-		if (pos < 0 || pos > width * height) return;
+		if (pos < 0 || pos > width * height) { return; }
 		
 		//disable the old grid position of the player
 		gv[player].player = false;
 		//update the player position
 		player = pos;
 		//creating a new field if it is null
-		if (gv[player] == null) gv[player] = new GridValues();
+		if (gv[player] == null) { gv[player] = new GridValues(); }
 		//enable the new grid position of the player
 		gv[player].player = true;
 		
@@ -131,12 +138,12 @@ public class Grid {
 		
 		for (int i = 0; i <= height * 2; i++) {
 			//left wall in each line of the grid
-			System.out.print("|");
+			TUI.print("|");
 			if (i % 2 == 0) {
 				//printing the top / bottom border of the fields
 				for (int j = 0; j < width; j++) {
-					if (j < width - 1) { System.out.print("----"); }
-					else { System.out.print("---"); }
+					if (j < width - 1) { TUI.print("----"); }
+					else { TUI.print("---"); }
 				}	
 			} else {
 				//printing the fields with her content
@@ -144,31 +151,30 @@ public class Grid {
 					//if the field is != null, it can be everything possible
 					if (gv[fieldNr] != null) {
 						//player
-						if (gv[fieldNr].player) { System.out.print(" P "); }
+						if (gv[fieldNr].player) { TUI.print(" P "); }
 						//ghost
-						else if (gv[fieldNr].ghost) { System.out.print(" G "); }
+						else if (gv[fieldNr].ghost) { TUI.print(" G "); }
 						//wall
-						else if (gv[fieldNr].isWall) { System.out.print(" x "); }
+						else if (gv[fieldNr].isWall) { TUI.print(" x "); }
 						//food
-						else if (gv[fieldNr].food) { System.out.print(" . "); }		
+						else if (gv[fieldNr].food) { TUI.print(" . "); }		
 						//nothing
-						else { System.out.print("   "); }
+						else { TUI.print("   "); }
 					} else {
 						//if it is null, it can only be food
-						System.out.print(" . ");
+						TUI.print(" . ");
 					}
 					
-					if (j < width - 1) { System.out.print("|"); }
+					if (j < width - 1) { TUI.print("|"); }
 					//increase the field number and do the same for the next field
 					fieldNr++;
 				}	
 			}
 			//right wall in each line of the grid
-			System.out.println("|");
+			TUI.println("|");
 		}
 		
 		return 0;
 	}
 
-	
 }
