@@ -1,4 +1,3 @@
-package pacman;
 import java.awt.geom.Point2D;
 
 public class ghost {

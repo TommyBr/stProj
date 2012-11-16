@@ -1,7 +1,4 @@
-package pacman.tui;
 import java.util.Scanner;
-
-import pacman.grid;
 
 public class TUI {
 
@@ -14,7 +11,7 @@ public class TUI {
 		g.initGrid(10, 6);
 		g.drawGrid();
 		scanner = new Scanner(System.in);
-		printInstructions();
+		printInstructions();q
 	}
 	
 	public int run() {
@@ -25,11 +22,18 @@ public class TUI {
 			return 1;
 		}
 		
+		if (s.charAt(0) == 'l') {
+			g.setPlayer(g.getPlayer() - 1);
+			g.drawGrid();
+			printInstructions();
+			return 0;
+		}
+		
 		return 0;
 	}
 	
 	public void printInstructions() {
 		System.out.println("P = PacMan, G = Geist");
-		System.out.println("Befehle: q = quit");
+		System.out.println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}
 }

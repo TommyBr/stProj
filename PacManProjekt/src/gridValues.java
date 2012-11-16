@@ -1,4 +1,3 @@
-package pacman;
 
 public class gridValues {
 	public Boolean ghost;

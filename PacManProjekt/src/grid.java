@@ -1,9 +1,8 @@
-package pacman;
 import static org.junit.Assert.*;
 import java.util.Random;
 
 public class grid {
-	private static int Width, Height;
+	private static int Width, Height, Player;
 	private static gridValues gv[];
 	
 	public grid() {
@@ -18,6 +17,7 @@ public class grid {
 		int r = (int)((Math.random() * width * height * 1000) % (width * height));
 		gv[r] = new gridValues();
 		gv[r].player = true;
+		Player = r;
 		return 0;
 	}
 	
@@ -27,6 +27,18 @@ public class grid {
 	
 	public static int getHeight() {
 		return Height;
+	}
+	
+	public static void setPlayer(int pos) {
+		if (pos < 0 || pos > Width * Height) return;
+		gv[Player].player = false;
+		Player = pos;
+		if (gv[Player] == null) gv[Player] = new gridValues();
+		gv[Player].player = true;
+	}
+	
+	public static int getPlayer() {
+		return Player;
 	}
 	
 	//zeichnet das Spielfeld in die Console

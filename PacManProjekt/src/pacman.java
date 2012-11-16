@@ -1,7 +1,6 @@
-package pacman;
 
 import pacman.*;
-import pacman.tui.TUI;
+
 import static org.junit.Assert.*;
 
 public class pacman {
