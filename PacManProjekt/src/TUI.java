@@ -11,7 +11,7 @@ public class TUI {
 		g.initGrid(10, 6);
 		g.drawGrid();
 		scanner = new Scanner(System.in);
-		printInstructions();q
+		printInstructions();
 	}
 	
 	public int run() {
