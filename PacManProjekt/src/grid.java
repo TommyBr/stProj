@@ -1,5 +1,3 @@
-import static org.junit.Assert.*;
-import java.util.Random;
 
 public class grid {
 	private static int Width, Height, Player;
@@ -9,27 +7,58 @@ public class grid {
 		
 	}
 	
+	private void createLabyrinth() {
+		for (int i = 1; i < Width - 1; i++) {
+			int idx = i + Width;
+			if (gv[idx] == null) gv[idx] = new gridValues();	
+			gv[idx].isWall = true;	
+		}
+		
+		for (int i = 2; i < Height - 1; i++) {
+			int idx = i * Width + 1;
+			if (gv[idx] == null) gv[idx] = new gridValues();	
+			gv[idx].isWall = true;	
+		}
+		
+		
+		for (int j = 3; j < Height; j+=2) {
+			for (int i = 3; i < Width - 1; i++) {
+				int idx = i + Width * j;
+				if (gv[idx] == null) gv[idx] = new gridValues();	
+				gv[idx].isWall = true;	
+			}
+		}
+	}
+	
 	public int initGrid(int width, int height) {
-		assertTrue(width > 0 && height > 0); 
 		Width = width;
 		Height = height;
 		gv = new gridValues[width * height]; 
+		createLabyrinth();
 		int r = (int)((Math.random() * width * height * 1000) % (width * height));
+		while (gv[r] != null) {
+			r = (int)((Math.random() * width * height * 1000) % (width * height));
+		}
 		gv[r] = new gridValues();
 		gv[r].player = true;
 		Player = r;
 		return 0;
 	}
 	
-	public static int getWidth() {
+	public int getWidth() {
 		return Width;
 	}
 	
-	public static int getHeight() {
+	public int getHeight() {
 		return Height;
 	}
 	
-	public static void setPlayer(int pos) {
+	public boolean isWall(int idx) {
+		if (gv[idx] != null && gv[idx].isWall) return true;
+		return false;
+	}
+	
+	public void setPlayer(int pos) {
 		if (pos < 0 || pos > Width * Height) return;
 		gv[Player].player = false;
 		Player = pos;
@@ -37,7 +66,7 @@ public class grid {
 		gv[Player].player = true;
 	}
 	
-	public static int getPlayer() {
+	public int getPlayer() {
 		return Player;
 	}
 	
@@ -54,7 +83,9 @@ public class grid {
 			} else {
 				for (int j = 0; j < Width; j++) {
 					if (gv[fieldNr] != null && gv[fieldNr].player) System.out.print(" P ");
-					else System.out.print("   ");
+					else if (gv[fieldNr] != null && gv[fieldNr].isWall) {
+						System.out.print(" x ");
+					} else System.out.print("   ");
 					if (j < Width - 1) System.out.print("|");
 					fieldNr++;
 				}	

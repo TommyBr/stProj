@@ -14,10 +14,13 @@ public class TUI {
 		printInstructions();
 	}
 	
-	boolean moveIsAllowed(int from, int to) {
+	boolean moveIsAllowed(int from, int to) {	
 		//ausserhalb des Grid?
 		if (from < 0 || to < 0 || from >= g.getHeight() * g.getWidth()
 				|| to >= g.getHeight() * g.getWidth()) return false;
+		
+		//Ziel eine Wand?
+		if (g.isWall(to)) return false;
 		
 		//linke Wand vom Grid erreicht?
 		if (to == from - 1 && g.getPlayer() % g.getWidth() == 0) return false;
@@ -86,7 +89,7 @@ public class TUI {
 	}
 	
 	public void printInstructions() {
-		System.out.println("P = PacMan, G = Geist");
+		System.out.println("P = PacMan, G = Geist, x = Wand");
 		System.out.println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}
 }
