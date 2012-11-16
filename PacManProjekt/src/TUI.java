@@ -1,16 +1,17 @@
 import java.util.Scanner;
 
 public class TUI {
+	//constant variables for constant numbers > 2
+	static final int gridWidth = 10, gridHeight = 6;
 	Scanner scanner;
-	static grid g;
+	static Grid g;
 	
 	public TUI() {
 		System.out.println("PacMan gestartet");
-		g = new grid();
-		g.initGrid(10, 6);
+		g = new Grid();
+		g.initGrid(gridWidth, gridHeight);
 		g.drawGrid();
 		printInstructions();
-		scanner = new Scanner(System.in);
 	}
 	
 	static boolean moveIsAllowed(int from, int to) {	
@@ -42,6 +43,7 @@ public class TUI {
 	
 	public int run() {
 		//read the ASCII input from the console
+		scanner = new Scanner(System.in);
 		String s = scanner.next();
 		
 		if (s.charAt(0) == 'q') {
@@ -93,6 +95,7 @@ public class TUI {
 		 	Instruction for the user to play the game.
 		 	The following lines will be printed after every move done by the user.
 		*/
+		System.out.println("Gegessen: " + Grid.eaten);
 		System.out.println("P = PacMan, G = Geist, x = Wand");
 		System.out.println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}

@@ -1,10 +1,10 @@
-public class gridValues {
+public class GridValues {
 	public Boolean ghost;
 	public Boolean player;
 	public Boolean isWall;
 	public Boolean food;
 	
-	public gridValues() {
+	public GridValues() {
 		ghost = false;
 		player = false;
 		isWall = false;

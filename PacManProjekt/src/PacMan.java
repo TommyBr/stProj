@@ -1,4 +1,4 @@
-public class pacman {
+public class PacMan {
 
 	/**
 	 * @param args
