@@ -14,6 +14,30 @@ public class TUI {
 		printInstructions();
 	}
 	
+	boolean moveIsAllowed(int from, int to) {
+		//ausserhalb des Grid?
+		if (from < 0 || to < 0 || from >= g.getHeight() * g.getWidth()
+				|| to >= g.getHeight() * g.getWidth()) return false;
+		
+		//linke Wand vom Grid erreicht?
+		if (to == from - 1 && g.getPlayer() % g.getWidth() == 0) return false;
+		
+		//rechte Wand vom Grid erreicht?
+		if (to - 1 == from && g.getPlayer() % g.getWidth() == g.getWidth() - 1) return false;
+				
+		//obere Wand vom Grid erreicht?
+		if (to < 0) {
+			return false;
+		}
+				
+		//obere Wand vom Grid erreicht?
+		if (to >= g.getHeight() * g.getWidth()) {
+			return false;
+		}
+				
+		return true;
+	}
+	
 	public int run() {
 		String s = scanner.next();
 		
@@ -22,8 +46,37 @@ public class TUI {
 			return 1;
 		}
 		
-		if (s.charAt(0) == 'l') {
+		//lach links bewegen
+		if (s.charAt(0) == 'a') {
+			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) return -1;
 			g.setPlayer(g.getPlayer() - 1);
+			g.drawGrid();
+			printInstructions();
+			return 0;
+		}
+		
+		//lach rechts bewegen
+		if (s.charAt(0) == 'd') {
+			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) return -1;
+			g.setPlayer(g.getPlayer() + 1);
+			g.drawGrid();
+			printInstructions();
+			return 0;
+		}
+
+		//lach oben bewegen
+		if (s.charAt(0) == 'w') {
+			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) return -1;
+			g.setPlayer(g.getPlayer() - g.getWidth());
+			g.drawGrid();
+			printInstructions();
+			return 0;
+		}
+
+		//lach unten bewegen
+		if (s.charAt(0) == 's') {
+			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) return -1;
+			g.setPlayer(g.getPlayer() + g.getWidth());
 			g.drawGrid();
 			printInstructions();
 			return 0;
