@@ -2,14 +2,14 @@ import java.util.Scanner;
 
 public class TUI {
 	//constant variables for constant numbers > 2
-	static final int gridWidth = 10, gridHeight = 6;
+	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6;
 	Scanner scanner;
 	static Grid g;
 	
 	public TUI() {
 		System.out.println("PacMan gestartet");
 		g = new Grid();
-		g.initGrid(gridWidth, gridHeight);
+		g.initGrid(GRIDWIDTH, GRIDHEIGHT);
 		g.drawGrid();
 		printInstructions();
 	}
