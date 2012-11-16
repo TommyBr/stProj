@@ -1,7 +1,7 @@
 public class Ghost {
 	//constant variables for constant numbers > 2
-	static final int three = 3, four = 4, thousand = 1000;
-	static int pos, directory;
+	static final int THREE = 3, FOUR = 4, THOUSAND = 1000;
+	private static int pos, directory;
 
 	public Ghost() {
 		//default directory - none
@@ -9,7 +9,7 @@ public class Ghost {
 	}
 	
 	static void chooseDirection() {
-		int d[] = new int[four];
+		int d[] = new int[FOUR];
 		int possibleDirectorys = 0;
 		
 		//move up
@@ -29,11 +29,11 @@ public class Ghost {
 		
 		//move right
 		if (TUI.moveIsAllowed(pos, pos + 1)) {
-			d[possibleDirectorys++] = three;
+			d[possibleDirectorys++] = THREE;
 		}
 		
 		//choose a random directory
-		int r = (int)(Math.random() * thousand);
+		int r = (int)(Math.random() * THOUSAND);
 		int newDirectory = d[r % possibleDirectorys];
 		
 		//new direction is opposite direction from the old? try to prefer an another
@@ -65,7 +65,7 @@ public class Ghost {
 			//move down
 			pos += Grid.getWidth();
 			break;
-		case three:
+		case THREE:
 			//move right
 			pos++;
 			break;

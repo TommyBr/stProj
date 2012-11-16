@@ -1,8 +1,8 @@
 public class GridValues {
-	public Boolean ghost;
-	public Boolean player;
-	public Boolean isWall;
-	public Boolean food;
+	Boolean ghost;
+	Boolean player;
+	Boolean isWall;
+	Boolean food;
 	
 	public GridValues() {
 		ghost = false;

@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class TUI {
 	//constant variables for constant numbers > 2
 	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6;
-	Scanner scanner;
-	static Grid g;
+	private Scanner scanner;
+	private static Grid g;
 	
 	public TUI() {
 		System.out.println("PacMan gestartet");
@@ -95,7 +95,7 @@ public class TUI {
 		 	Instruction for the user to play the game.
 		 	The following lines will be printed after every move done by the user.
 		*/
-		System.out.println("Gegessen: " + Grid.eaten);
+		System.out.println("Gegessen: " + Grid.getEaten());
 		System.out.println("P = PacMan, G = Geist, x = Wand");
 		System.out.println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}

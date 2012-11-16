@@ -1,17 +1,21 @@
 public class Grid {
 	//constant variables for constant numbers > 2
-	static final int three = 3, thousand = 1000;
+	static final int THREE = 3, THOUSAND = 1000;
 	private static int width, height, player;
 	public static GridValues gv[];
 	private static Ghost ghost;
 	//number of eaten food (clear fields)
-	public static int eaten;
+	private static int eaten;
 	
 	public Grid() {
 		//creating a new ghost
 		ghost = new Ghost();
 		//nothing eaten at the beginning
 		eaten = 0;
+	}
+	
+	static int getEaten() {
+		return eaten;
 	}
 	
 	void placeWall(int idx) {
@@ -32,15 +36,15 @@ public class Grid {
 			placeWall(i * width + 1);
 		}
 		
-		for (int j = three; j < height; j+=2) {
-			for (int i = three; i < width - 1; i++) {
+		for (int j = THREE; j < height; j+=2) {
+			for (int i = THREE; i < width - 1; i++) {
 				placeWall(i + width * j);
 			}
 		}
 	}
 	
 	int getRandomField() {
-		return (int)((Math.random() * width * height * thousand) % (width * height));
+		return (int)((Math.random() * width * height * THOUSAND) % (width * height));
 	}
 	
 	public int initGrid(int newWidth, int newHeight) {
@@ -131,8 +135,8 @@ public class Grid {
 			if (i % 2 == 0) {
 				//printing the top / bottom border of the fields
 				for (int j = 0; j < width; j++) {
-					if (j < width - 1) System.out.print("----");
-					else System.out.print("---");
+					if (j < width - 1) { System.out.print("----"); }
+					else { System.out.print("---"); }
 				}	
 			} else {
 				//printing the fields with her content
@@ -140,21 +144,21 @@ public class Grid {
 					//if the field is != null, it can be everything possible
 					if (gv[fieldNr] != null) {
 						//player
-						if (gv[fieldNr].player) System.out.print(" P ");
+						if (gv[fieldNr].player) { System.out.print(" P "); }
 						//ghost
-						else if (gv[fieldNr].ghost) System.out.print(" G ");
+						else if (gv[fieldNr].ghost) { System.out.print(" G "); }
 						//wall
-						else if (gv[fieldNr].isWall) System.out.print(" x ");
+						else if (gv[fieldNr].isWall) { System.out.print(" x "); }
 						//food
-						else if (gv[fieldNr].food) System.out.print(" . ");		
+						else if (gv[fieldNr].food) { System.out.print(" . "); }		
 						//nothing
-						else System.out.print("   ");
+						else { System.out.print("   "); }
 					} else {
 						//if it is null, it can only be food
 						System.out.print(" . ");
 					}
 					
-					if (j < width - 1) System.out.print("|");
+					if (j < width - 1) { System.out.print("|"); }
 					//increase the field number and do the same for the next field
 					fieldNr++;
 				}	
