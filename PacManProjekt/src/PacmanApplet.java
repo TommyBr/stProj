@@ -65,7 +65,7 @@ public class PacmanApplet extends Applet implements Runnable {
 			setBackground(Color.black);
 			
 			// Laden der PacmanBilddatei pacpix_0.gif
-			pacmanImage = getImage(getCodeBase(),"pacpix_0.gif");
+			//pacmanImage = getImage(getCodeBase(),"pacpix_0.gif");
 			
 		}
 		
