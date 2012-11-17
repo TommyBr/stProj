@@ -1,3 +1,4 @@
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class TUI {
@@ -90,7 +91,8 @@ public class TUI {
 	
 
 	static void print(String s) {
-		System.out.print(s);
+		PrintStream out=System.out;
+		out.print(s);
 	}
 	
 	static void println(String s) {
