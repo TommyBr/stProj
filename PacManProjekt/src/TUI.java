@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class TUI {
 	//constant variables for constant numbers > 2
 	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6;
-	private Scanner scanner;
 	private static Grid g;
 	
 	public TUI() {
@@ -42,7 +41,7 @@ public class TUI {
 	
 	public int run() {
 		//read the ASCII input from the console
-		scanner = new Scanner(System.in);
+		Scanner scanner = new Scanner(System.in);
 		String s = scanner.next();
 		
 		if (s.charAt(0) == 'q') {
