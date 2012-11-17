@@ -30,6 +30,18 @@ public class TUI {
 		return true;
 	}
 	
+	int checkSetAndDraw(int playerpos) {
+		//set the player position
+		g.setPlayer(playerpos);
+		//draw the grid
+		g.drawGrid();
+		//if the game is over return 1
+		if (Grid.gameStatus() != 0) { return 1; }
+		//print instructions if game isn't over
+		printInstructions();
+		return 0;
+	}
+	
 	public int run() {
 		//read the ASCII input from the console
 		Scanner scanner = new Scanner(System.in);
@@ -43,45 +55,25 @@ public class TUI {
 		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
-			g.setPlayer(g.getPlayer() - 1);
-			g.drawGrid();
-			//if the game is over return 1
-			if (Grid.gameStatus() != 0) { return 1; }
-			printInstructions();
-			return 0;
+			return checkSetAndDraw(g.getPlayer() - 1);
 		}
 		
 		//move right
 		if (s.charAt(0) == 'd') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) { return -1; }
-			g.setPlayer(g.getPlayer() + 1);
-			g.drawGrid();
-			//if the game is over return 1
-			if (Grid.gameStatus() != 0) { return 1; }
-			printInstructions();
-			return 0;
+			return checkSetAndDraw(g.getPlayer() + 1);
 		}
 
 		//move up
 		if (s.charAt(0) == 'w') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) { return -1; }
-			g.setPlayer(g.getPlayer() - g.getWidth());
-			g.drawGrid();
-			//if the game is over return 1
-			if (Grid.gameStatus() != 0) { return 1; }
-			printInstructions();
-			return 0;
+			return checkSetAndDraw(g.getPlayer() - g.getWidth());
 		}
 
 		//move down
 		if (s.charAt(0) == 's') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) { return -1; }
-			g.setPlayer(g.getPlayer() + g.getWidth());
-			g.drawGrid();
-			//if the game is over return 1
-			if (Grid.gameStatus() != 0) { return 1; }
-			printInstructions();
-			return 0;
+			return checkSetAndDraw(g.getPlayer() + g.getWidth());
 		}	
 		
 		return 0;
