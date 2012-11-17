@@ -45,6 +45,8 @@ public class TUI {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
 			g.setPlayer(g.getPlayer() - 1);
 			g.drawGrid();
+			//if the game is over return 1
+			if (Grid.gameStatus() != 0) { return 1; }
 			printInstructions();
 			return 0;
 		}
@@ -54,6 +56,8 @@ public class TUI {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) { return -1; }
 			g.setPlayer(g.getPlayer() + 1);
 			g.drawGrid();
+			//if the game is over return 1
+			if (Grid.gameStatus() != 0) { return 1; }
 			printInstructions();
 			return 0;
 		}
@@ -63,6 +67,8 @@ public class TUI {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) { return -1; }
 			g.setPlayer(g.getPlayer() - g.getWidth());
 			g.drawGrid();
+			//if the game is over return 1
+			if (Grid.gameStatus() != 0) { return 1; }
 			printInstructions();
 			return 0;
 		}
@@ -72,9 +78,11 @@ public class TUI {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) { return -1; }
 			g.setPlayer(g.getPlayer() + g.getWidth());
 			g.drawGrid();
+			//if the game is over return 1
+			if (Grid.gameStatus() != 0) { return 1; }
 			printInstructions();
 			return 0;
-		}
+		}	
 		
 		return 0;
 	}
@@ -84,9 +92,13 @@ public class TUI {
 		 	Instruction for the user to play the game.
 		 	The following lines will be printed after every move done by the user.
 		*/
-		println("Gegessen: " + Grid.getEaten());
+		printStatistic();
 		println("P = PacMan, G = Geist, x = Wand");
 		println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
+	}
+	
+	static void printStatistic() {
+		println("Gegessen: " + Grid.getEaten() + "\t\tVerbleibend: " + Grid.getFoodLeft() + "\t\tZüge: " + Grid.getMovements());
 	}
 	
 

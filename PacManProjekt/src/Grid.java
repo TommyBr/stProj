@@ -4,26 +4,36 @@ public class Grid {
 	private static int width, height, player;
 	private static GridValues gv;
 	//number of eaten food (clear fields)
-	private static int eaten;
+	private static int eaten, foodleft, movements;
+	
 	
 	public Grid() {
 		//nothing eaten at the beginning
 		eaten = 0;
+		//no move done
+		movements = 0;
 	}
 	
 	static GridValues getGridValue() {
 		return gv;
 	}
 	
+	//returns the number of eaten food
 	static int getEaten() {
 		return eaten;
+	}
+	
+	//returns the number of movements
+	static int getMovements() {
+		return movements;
 	}
 	
 	void placeWall(int idx) {
 		//mark this field as a wall
 		gv.setWall(idx, true);	
 		//you can't eat a wall
-		gv.setFood(idx, false);	
+		gv.setFood(idx, false);
+		foodleft--;
 	}
 	
 	private void createLabyrinth() {
@@ -47,8 +57,13 @@ public class Grid {
 	}
 	
 	public int initGrid(int newWidth, int newHeight) {
+		//dimensions of the grid
 		width = newWidth;
 		height = newHeight;
+		
+		//at the beginning all fields are food
+		foodleft = width * height;
+		
 		//creating a new grid
 		gv.create(width * height);
 		//and draw a labyrinth, adjusted to the dimensions
@@ -59,6 +74,7 @@ public class Grid {
 		while (!gv.fieldIsEmpty(r)) { r = getRandomField(); }
 		//mark it as non-food
 		gv.setFood(r, false);
+		foodleft--;
 		//mark it as player
 		gv.setPlayer(r, true);
 		//update the player position
@@ -85,6 +101,10 @@ public class Grid {
 		return height;
 	}
 	
+	static int getFoodLeft() {
+		return foodleft;
+	}
+	
 	//returns true if the field "idx" is a wall
 	public boolean isWall(int idx) {
 		if (gv.isWall(idx)) { return true; }
@@ -102,19 +122,46 @@ public class Grid {
 		//enable the new grid position of the player
 		gv.setPlayer(player, true);
 		
-		//counting the eaten food and mark the field as no food
+		//counting the food and mark the field as no food
 		if (gv.isFood(player)) {
 			eaten++;
+			foodleft--;
 			gv.setFood(player, false);
 		}
 		
+		//counting movements
+		movements++;
+		
 		//if the player has moved, the ghost should move
-		Ghost.move();
+		if (gameStatus() == 0) { Ghost.move(); }
 	}
 	
 	//returns the position of the player
-	public int getPlayer() {
+	static int getPlayer() {
 		return player;
+	}
+	
+	//checking the status of the game
+	static int gameStatus() {
+		//player and ghost at the same field?
+		if (getPlayer() == Ghost.getPos()) {
+			TUI.println("Du Wurdest vom Geist gefangen!\nSpielende.");
+			//printing statistics
+			TUI.printStatistic();
+			//player loose
+			return -1;
+		}
+		
+		//all food eaten?
+		if (foodleft == 0) {
+			TUI.println("Du hast es geschaft alles aufzuessen!\nSpielende.");
+			//printing statistics
+			TUI.printStatistic();
+			//player win
+			return 1;
+		}
+		
+		return 0;
 	}
 	
 	public int drawGrid() {
