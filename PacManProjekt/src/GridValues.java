@@ -4,6 +4,8 @@ public class GridValues {
 	private static boolean[] isWall;
 	private static boolean[] food;
 	
+	private GridValues() { }
+	
 	static void create(int count) {
 		ghost = new boolean[count];
 		player = new boolean[count];
@@ -20,10 +22,7 @@ public class GridValues {
 	}
 	
 	static boolean fieldIsEmpty(int idx) {
-		if (ghost[idx] == false && player[idx] == false && isWall[idx] == false) {
-			return true;
-		}
-		return false;
+		return (ghost[idx] == player[idx] == isWall[idx] == false);
 	}
 	
 	static boolean isGhost(int idx) {

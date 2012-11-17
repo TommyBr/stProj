@@ -3,13 +3,10 @@ public class Grid {
 	static final int THREE = 3, THOUSAND = 1000;
 	private static int width, height, player;
 	private static GridValues gv;
-	private static Ghost ghost;
 	//number of eaten food (clear fields)
 	private static int eaten;
 	
 	public Grid() {
-		//creating a new ghost
-		ghost = new Ghost();
 		//nothing eaten at the beginning
 		eaten = 0;
 	}

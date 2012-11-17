@@ -3,7 +3,7 @@ public class Ghost {
 	static final int THREE = 3, FOUR = 4, THOUSAND = 1000;
 	private static int pos, directory;
 
-	public Ghost() {
+	private Ghost() {
 		//default directory - none
 		directory = -1;
 	}
