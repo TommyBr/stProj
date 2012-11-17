@@ -1,4 +1,4 @@
-public class Ghost {
+public final class Ghost {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, FOUR = 4, THOUSAND = 1000;
 	private static int pos, directory;

@@ -1,4 +1,4 @@
-public class GridValues {
+public final class GridValues {
 	private static boolean[] ghost;
 	private static boolean[] player;
 	private static boolean[] isWall;
@@ -22,7 +22,7 @@ public class GridValues {
 	}
 	
 	static boolean fieldIsEmpty(int idx) {
-		return (ghost[idx] == player[idx] == isWall[idx] == false);
+		return (!ghost[idx] && !player[idx] && !isWall[idx]);
 	}
 	
 	static boolean isGhost(int idx) {

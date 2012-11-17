@@ -1,4 +1,4 @@
-public class PacMan {
+public final class PacMan {
 
 	private PacMan() { }
 	

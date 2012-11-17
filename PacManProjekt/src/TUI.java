@@ -26,16 +26,6 @@ public class TUI {
 		//right border from the grid eached?
 		if (to - 1 == from && from % g.getWidth() == g.getWidth() - 1) { return false; }
 				
-		//top border from the grid eached?
-		if (to < 0) {
-			return false;
-		}
-				
-		//bottom border from the grid eached?
-		if (to >= g.getHeight() * g.getWidth()) {
-			return false;
-		}
-				
 		return true;
 	}
 	

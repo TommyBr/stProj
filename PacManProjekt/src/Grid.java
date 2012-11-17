@@ -117,7 +117,6 @@ public class Grid {
 		return player;
 	}
 	
-	//"drawing" the grid on the console
 	public int drawGrid() {
 		//number of the current field that will be draw
 		int fieldNr = 0;
@@ -127,28 +126,13 @@ public class Grid {
 			TUI.print("|");
 			if (i % 2 == 0) {
 				//printing the top / bottom border of the fields
-				for (int j = 0; j < width; j++) {
-					if (j < width - 1) { TUI.print("----"); }
-					else { TUI.print("---"); }
-				}	
+				drawTopBottom();
 			} else {
 				//printing the fields with her content
 				for (int j = 0; j < width; j++) {
-					
-					//player
-					if (gv.isPlayer(fieldNr)) { TUI.print(" P "); }
-					//ghost
-					else if (gv.isGhost(fieldNr)) { TUI.print(" G "); }
-					//wall
-					else if (gv.isWall(fieldNr)) { TUI.print(" x "); }
-					//food
-					else if (gv.isFood(fieldNr)) { TUI.print(" . "); }	
-					//nothing
-					else { TUI.print("   "); }
-					
+					drawFieldContent(fieldNr++);
 					if (j < width - 1) { TUI.print("|"); }
 					//increase the field number and do the same for the next field
-					fieldNr++;
 				}	
 			}
 			//right wall in each line of the grid
@@ -156,6 +140,26 @@ public class Grid {
 		}
 		
 		return 0;
+	}
+	
+	void drawTopBottom() {
+		for (int j = 0; j < width; j++) {
+			if (j < width - 1) { TUI.print("----"); }
+			else { TUI.print("---"); }
+		}	
+	}
+	
+	void drawFieldContent(int fieldNr) {
+		//player
+		if (gv.isPlayer(fieldNr)) { TUI.print(" P "); }
+		//ghost
+		else if (gv.isGhost(fieldNr)) { TUI.print(" G "); }
+		//wall
+		else if (gv.isWall(fieldNr)) { TUI.print(" x "); }
+		//food
+		else if (gv.isFood(fieldNr)) { TUI.print(" . "); }	
+		//nothing
+		else { TUI.print("   "); }
 	}
 
 }
