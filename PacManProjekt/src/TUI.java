@@ -91,7 +91,7 @@ public class TUI {
 	
 
 	static void print(String s) {
-		PrintStream out=System.out;
+		PrintStream out = System.out;
 		out.print(s);
 	}
 	
