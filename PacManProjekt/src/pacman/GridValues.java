@@ -1,3 +1,4 @@
+package pacman;
 public final class GridValues {
 	private static boolean[] ghost;
 	private static boolean[] player;

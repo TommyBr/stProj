@@ -1,3 +1,4 @@
+package pacman;
 public class Grid {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, THOUSAND = 1000;

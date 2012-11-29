@@ -1,3 +1,4 @@
+package pacman;
 public final class PacMan {
 
 	private PacMan() { }
