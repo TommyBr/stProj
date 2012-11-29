@@ -1,13 +1,13 @@
 package pacman;
 public final class GridValues {
-	private static boolean[] ghost;
-	private static boolean[] player;
-	private static boolean[] isWall;
-	private static boolean[] food;
+	private boolean[] ghost;
+	private boolean[] player;
+	private boolean[] isWall;
+	private boolean[] food;
 	
-	private GridValues() { }
+	protected GridValues() { }
 	
-	static void create(int count) {
+	void create(int count) {
 		ghost = new boolean[count];
 		player = new boolean[count];
 		isWall = new boolean[count];
@@ -22,39 +22,39 @@ public final class GridValues {
 		}
 	}
 	
-	static boolean fieldIsEmpty(int idx) {
+	boolean fieldIsEmpty(int idx) {
 		return (!ghost[idx] && !player[idx] && !isWall[idx]);
 	}
 	
-	static boolean isGhost(int idx) {
+	boolean isGhost(int idx) {
 		return ghost[idx];
 	}	
 	
-	static boolean isPlayer(int idx) {
+	boolean isPlayer(int idx) {
 		return player[idx];
 	}	
 	
-	static boolean isWall(int idx) {
+	boolean isWall(int idx) {
 		return isWall[idx];
 	}
 	
-	static boolean isFood(int idx) {
+	boolean isFood(int idx) {
 		return food[idx];
 	}
 	
-	static void setGhost(int idx, boolean bool) {
+	void setGhost(int idx, boolean bool) {
 		ghost[idx] = bool;
 	}	
 	
-	public static void setPlayer(int idx, boolean bool) {
+	public void setPlayer(int idx, boolean bool) {
 		player[idx] = bool;
 	}	
 	
-	static void setWall(int idx, boolean bool) {
+	void setWall(int idx, boolean bool) {
 		isWall[idx] = bool;
 	}	
 	
-	static void setFood(int idx, boolean bool) {
+	void setFood(int idx, boolean bool) {
 		food[idx] = bool;
 	}
 	
