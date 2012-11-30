@@ -9,6 +9,14 @@ public final class Ghost {
 		directory = -1;
 	}
 	
+	static int getDirectory() {
+		return directory;
+	}
+	
+	static void setDirectory(int dir) {
+		directory = dir;
+	}
+	
 	static void chooseDirection() {
 		int d[] = new int[FOUR];
 		int possibleDirectorys = 0;
