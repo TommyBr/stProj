@@ -32,6 +32,9 @@ public class GridValuesTest extends TestCase {
 		
 		gv.setFood(0, false);
 		assertFalse(gv.isFood(0));
+		
+		gv.setWall(0, false);
+		assertFalse(gv.isWall(0));
 	}
 
 	@Test
