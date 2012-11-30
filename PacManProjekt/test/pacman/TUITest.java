@@ -26,12 +26,17 @@ public class TUITest {
 
 	@Test
 	public final void testMoveIsAllowed() {
-
+		assertFalse(tui.moveIsAllowed(-1, -2));
+		assertFalse(tui.moveIsAllowed(0, -2));
+		assertFalse(tui.moveIsAllowed(GRIDWIDTH * GRIDHEIGHT, 0));
+		assertFalse(tui.moveIsAllowed(GRIDWIDTH, GRIDWIDTH - 1));
 	}
 
 	@Test
 	public final void testCheckSetAndDraw() {
 		g.setPlayer(1);
+		assertSame(tui.checkSetAndDraw(1), 0);
+		g.setPlayer(tui.getGhost());
 		assertSame(tui.checkSetAndDraw(1), 0);
 	}
 

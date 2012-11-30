@@ -143,6 +143,10 @@ public class Grid {
 		return player;
 	}
 	
+	static int getGhost() {
+		return Ghost.getPos();
+	}
+	
 	//checking the status of the game
 	static int gameStatus() {
 		//player and ghost at the same field?

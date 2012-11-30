@@ -14,9 +14,14 @@ public class TUI {
 		g.drawGrid();
 	}
 	
+	static int getGhost() {
+		return Ghost.getPos();
+	}
+	
 	static boolean moveIsAllowed(int from, int to) {	
 		//make sure to move within the limit of the grid
-		if (from < 0 || to < 0 || from >= g.getHeight() * g.getWidth()
+		if (from < 0 || to < 0 
+				|| from >= g.getHeight() * g.getWidth()
 				|| to >= g.getHeight() * g.getWidth()) { return false; }
 		
 		//is the destination field a wall?
