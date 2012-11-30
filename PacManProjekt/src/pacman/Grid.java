@@ -13,6 +13,7 @@ public class Grid {
 		eaten = 0;
 		//no move done
 		movements = 0;
+		gv = new GridValues();
 	}
 	
 	static GridValues getGridValue() {
