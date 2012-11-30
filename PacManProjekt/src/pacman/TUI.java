@@ -43,11 +43,7 @@ public class TUI {
 		return 0;
 	}
 	
-	public int run() {
-		//read the ASCII input from the console
-		Scanner scanner = new Scanner(System.in);
-		String s = scanner.next();
-		
+	public int run(String s) {
 		if (s.charAt(0) == 'q') {
 			println("quit");
 			return 1;
@@ -78,6 +74,13 @@ public class TUI {
 		}	
 		
 		return 0;
+	}
+		
+	public int run() {
+		//read the ASCII input from the console
+		Scanner scanner = new Scanner(System.in);
+		String s = scanner.next();
+		return run(s);
 	}
 	
 	static void printInstructions() {
