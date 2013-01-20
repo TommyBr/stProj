@@ -4,18 +4,14 @@ import java.util.Scanner;
 
 public class TUI {
 	//constant variables for constant numbers > 2
-	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6;
+	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6, GHOSTS = 2;
 	private static Grid g;
 	
 	public TUI() {
 		println("PacMan gestartet");
 		g = new Grid();
-		g.initGrid(GRIDWIDTH, GRIDHEIGHT);
+		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
 		g.drawGrid();
-	}
-	
-	static int getGhost() {
-		return Ghost.getPos();
 	}
 	
 	static boolean moveIsAllowed(int from, int to) {	
@@ -42,11 +38,12 @@ public class TUI {
 		//draw the grid
 		g.drawGrid();
 		//if the game is over return 1
-		if (Grid.gameStatus() != 0) { return 1; }
+		if (g.gameStatus() != 0) { return 1; }
 		//print instructions if game isn't over
 		printInstructions();
 		return 0;
 	}
+	
 	
 	public int run(String s) {
 		if (s.charAt(0) == 'q') {
@@ -99,7 +96,7 @@ public class TUI {
 	}
 	
 	static void printStatistic() {
-		println("Gegessen: " + Grid.getEaten() + "\t\tVerbleibend: " + Grid.getFoodLeft() + "\t\tZüge: " + Grid.getMovements());
+		println("Gegessen: " + g.getEaten() + "\t\tVerbleibend: " + g.getFoodLeft() + "\t\tZüge: " + g.getMovements());
 	}
 	
 

@@ -2,8 +2,9 @@ package pacman;
 public class Grid {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, THOUSAND = 1000;
-	private static int width, height, player;
+	private static int width, height, player, ghosts;
 	private static GridValues gv;
+	private Ghost ghost[];
 	//number of eaten food (clear fields)
 	private static int eaten, foodleft, movements;
 	
@@ -58,7 +59,25 @@ public class Grid {
 		return (int)((Math.random() * width * height * THOUSAND) % (width * height));
 	}
 	
-	public int initGrid(int newWidth, int newHeight) {
+	void initGhosts(int numberOfGhosts) {
+		ghosts = numberOfGhosts;
+		ghost = new Ghost[ghosts];
+		
+		int r;
+		for (int i = 0; i < ghosts; i++) {
+			//creating a new Ghost
+			ghost[i] = new Ghost();
+			//searching for an another random field that is not in use
+			r = getRandomField();
+			while (!gv.fieldIsEmpty(r)) { r = getRandomField(); }
+			//mark it as ghost
+			gv.setGhost(r, true);
+			//update the ghost position
+			ghost[i].setPos(r);	
+		}
+	}
+	
+	public int initGrid(int newWidth, int newHeight, int numberOfGhosts) {
 		//dimensions of the grid
 		width = newWidth;
 		height = newHeight;
@@ -82,14 +101,8 @@ public class Grid {
 		//update the player position
 		player = r;
 		
-		//searching for an another random field that is not in use
-		r = getRandomField();
-		while (!gv.fieldIsEmpty(r)) { r = getRandomField(); }
-		//mark it as ghost
-		gv.setGhost(r, true);
-		//update the ghost position
-		Ghost.setPos(r);
-		
+		//initiate Ghosts
+		initGhosts(numberOfGhosts);		
 		return 0;
 	}
 	
@@ -135,7 +148,9 @@ public class Grid {
 		movements++;
 		
 		//if the player has moved, the ghost should move
-		if (gameStatus() == 0) { Ghost.move(); }
+		for (int i = 0; i < ghosts; i++) {
+			if (gameStatus() == 0) { ghost[i].move(); }
+		}
 	}
 	
 	//returns the position of the player
@@ -143,19 +158,21 @@ public class Grid {
 		return player;
 	}
 	
-	static int getGhost() {
-		return Ghost.getPos();
+	int getGhost(int idx) {
+		return ghost[idx].getPos();
 	}
 	
 	//checking the status of the game
-	static int gameStatus() {
+	int gameStatus() {
 		//player and ghost at the same field?
-		if (getPlayer() == Ghost.getPos()) {
-			TUI.println("Du Wurdest vom Geist gefangen!\nSpielende.");
-			//printing statistics
-			TUI.printStatistic();
-			//player loose
-			return -1;
+		for (int i = 0; i < ghosts; i++) {
+			if (getPlayer() == ghost[i].getPos()) {
+				TUI.println("Du Wurdest vom Geist gefangen!\nSpielende.");
+				//printing statistics
+				TUI.printStatistic();
+				//player loose
+				return -1;
+			}
 		}
 		
 		//all food eaten?

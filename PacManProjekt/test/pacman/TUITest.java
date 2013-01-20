@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class TUITest {
 	//constant variables for constant numbers > 2
-	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6;
+	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6, GHOSTS = 1;
 	private static Grid g;
 	private static TUI tui;
 
@@ -16,7 +16,7 @@ public class TUITest {
 	public void setUp() throws Exception {
 		tui = new TUI();
 		g = new Grid();
-		g.initGrid(GRIDWIDTH, GRIDHEIGHT);
+		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
 	}
 
 	@After
@@ -36,7 +36,7 @@ public class TUITest {
 	public final void testCheckSetAndDraw() {
 		g.setPlayer(1);
 		assertSame(tui.checkSetAndDraw(1), 0);
-		g.setPlayer(tui.getGhost());
+		g.setPlayer(g.getGhost(0));
 		assertSame(tui.checkSetAndDraw(1), 0);
 	}
 

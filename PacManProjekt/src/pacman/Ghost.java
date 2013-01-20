@@ -2,22 +2,22 @@ package pacman;
 public final class Ghost {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, FOUR = 4, THOUSAND = 1000;
-	private static int pos, directory;
+	private int pos, directory;
 
-	protected Ghost() {
+	public Ghost() {
 		//default directory - none
 		directory = -1;
 	}
 	
-	static int getDirectory() {
+	int getDirectory() {
 		return directory;
 	}
 	
-	static void setDirectory(int dir) {
+	void setDirectory(int dir) {
 		directory = dir;
 	}
 	
-	static void chooseDirection() {
+	void chooseDirection() {
 		int d[] = new int[FOUR];
 		int possibleDirectorys = 0;
 		
@@ -54,7 +54,7 @@ public final class Ghost {
 		directory = newDirectory;	
 	}
 	
-	static void move() {
+	void move() {
 		//choose a random directory
 		chooseDirection();
 		
@@ -88,12 +88,12 @@ public final class Ghost {
 	}
 	
 	//returns the position of the ghost
-	public static int getPos() {
+	public int getPos() {
 		return pos;
 	}
 	
 	//sets the position of the ghost
-	public static void setPos(int newPos) {
+	public void setPos(int newPos) {
 		pos = newPos;
 	}
 
