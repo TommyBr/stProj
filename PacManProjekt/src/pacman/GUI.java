@@ -10,7 +10,6 @@ import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
 	private static final int FOUR = 4, EIGHT = 8, FORTY = 40, THREEHUNDRED = 300, TENTHOUSAND = 10000;
-	private static final Color BACKGROUNDCOLOR = null;
 	private int boxsize = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = boxsize / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
