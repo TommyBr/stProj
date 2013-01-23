@@ -10,10 +10,10 @@ import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
 	private static final int FOUR = 4, EIGHT = 8, FORTY = 40, THREEHUNDRED = 300, TENTHOUSAND = 10000;
-	private int BOXSIZE = FORTY, WIDTH = TENTHOUSAND, HEIGHT = TENTHOUSAND, FOODRADIUS = BOXSIZE / EIGHT;
+	int BOXSIZE = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = BOXSIZE / EIGHT;
 	//up, down, left, right
 	private final int[] MOUTHDIRECTIONS = {120, 300, 210, 30};
-	private Color WALLCOLOR = Color.BLUE, BACKGROUNDCOLOR = Color.black,
+	private final Color WALLCOLOR = Color.BLUE, BACKGROUNDCOLOR = Color.black,
 				  FOODCOLOR = Color.WHITE, PLAYERCOLOR = Color.YELLOW;
 	
 	private JFrame frame;
@@ -36,8 +36,8 @@ public class GUI extends JPanel implements ActionListener {
 	
 	private void drawFood(Graphics g, int idx) {
 		g.setColor(FOODCOLOR);
-		g.fillOval((idx % TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - FOODRADIUS, 
-				(idx / TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - FOODRADIUS, FOODRADIUS * 2, FOODRADIUS * 2);
+		g.fillOval((idx % TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - foodRadius, 
+				(idx / TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
 	}
 	
 	private void drawPlayer(Graphics g, int idx) {
@@ -62,7 +62,7 @@ public class GUI extends JPanel implements ActionListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(BACKGROUNDCOLOR);
-		g.fillRect(0, 0, WIDTH * BOXSIZE, HEIGHT * BOXSIZE);	
+		g.fillRect(0, 0, width * BOXSIZE, height * BOXSIZE);	
 		drawGame(g);
 	}
 	
@@ -80,9 +80,9 @@ public class GUI extends JPanel implements ActionListener {
 		}	
 	}
 	
-	protected void create(int width, int height) {
-		WIDTH = width;
-		HEIGHT = height;
+	protected void create(int newwidth, int newheight) {
+		width = newwidth;
+		height = newheight;
 		frame = new JFrame();
 		frame.setTitle("PacMan");
 		
@@ -125,8 +125,8 @@ public class GUI extends JPanel implements ActionListener {
         frame.add(new GUI());
         frame.setVisible(true);   
         
-        frame.setSize(frame.getInsets().left + frame.getInsets().right  + width * BOXSIZE,
-        		frame.getInsets().top +  frame.getInsets().bottom + height * BOXSIZE + menu.getHeight());
+        frame.setSize(frame.getInsets().left + frame.getInsets().right  + newwidth * BOXSIZE,
+        		frame.getInsets().top +  frame.getInsets().bottom + newheight * BOXSIZE + menu.getHeight());
         frame.setLocationRelativeTo(null);
 	}
 	
