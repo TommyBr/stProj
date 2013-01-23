@@ -14,7 +14,7 @@ public class GUI extends JPanel implements ActionListener {
 	private int boxsize = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = boxsize / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
-	final Color wallColor = Color.BLUE, backgoundColor = Color.black,
+	private final Color wallColor = Color.BLUE, backgoundColor = Color.black,
 				  foodColor = Color.WHITE, playerColor = Color.YELLOW;
 	
 	private JFrame frame;
