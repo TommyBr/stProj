@@ -14,8 +14,6 @@ public class GUI extends JPanel implements ActionListener {
 	private int boxsize = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = boxsize / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
-	private final Color wallColor = Color.BLUE, backgoundColor = Color.black,
-				  foodColor = Color.WHITE, playerColor = Color.YELLOW;
 	
 	private JFrame frame;
 	private JMenuItem menuFileHelp;
@@ -31,18 +29,18 @@ public class GUI extends JPanel implements ActionListener {
 	}
 	
 	private void drawWallRect(Graphics g, int idx) {
-		g.setColor(wallColor);
+		g.setColor(Color.BLUE);
 		g.fillRect((idx % TUI.getGrid().getWidth()) * boxsize, (idx / TUI.getGrid().getWidth()) * boxsize, boxsize - 1, boxsize - 1);
 	}
 	
 	private void drawFood(Graphics g, int idx) {
-		g.setColor(foodColor);
+		g.setColor(Color.WHITE);
 		g.fillOval((idx % TUI.getGrid().getWidth()) * boxsize + boxsize / 2 - foodRadius, 
 				(idx / TUI.getGrid().getWidth()) * boxsize + boxsize / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
 	}
 	
 	private void drawPlayer(Graphics g, int idx) {
-		g.setColor(playerColor);
+		g.setColor(Color.YELLOW);
 		g.fillArc((idx % TUI.getGrid().getWidth()) * boxsize + 2, idx / TUI.getGrid().getWidth() * boxsize + 2,
 		boxsize - FOUR, boxsize - FOUR, mouthDirections[TUI.getDirection()], THREEHUNDRED);
 	}
@@ -62,7 +60,7 @@ public class GUI extends JPanel implements ActionListener {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(BACKGROUNDCOLOR);
+		g.setColor(Color.black);
 		g.fillRect(0, 0, width * boxsize, height * boxsize);	
 		drawGame(g);
 	}
