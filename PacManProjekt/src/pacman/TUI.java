@@ -4,14 +4,26 @@ import java.util.Scanner;
 
 public class TUI {
 	//constant variables for constant numbers > 2
-	static final int GRIDWIDTH = 10, GRIDHEIGHT = 6, GHOSTS = 2;
-	private static Grid g;
+	static final int GRIDWIDTH = 8, GRIDHEIGHT = 5, GHOSTS = 2;
+	private static boolean USEGUI = true;
+	protected static Grid g;
+	private static GUI gui;
+	private static int direction = 2;
 	
 	public TUI() {
 		println("PacMan gestartet");
 		g = new Grid();
 		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
 		g.drawGrid();
+		
+		if (USEGUI) {
+			gui = new GUI();
+			gui.create(GRIDWIDTH, GRIDHEIGHT);
+		}
+	}
+	
+	public static int getDirection() {
+		return direction;
 	}
 	
 	static boolean moveIsAllowed(int from, int to) {	
@@ -32,53 +44,70 @@ public class TUI {
 		return true;
 	}
 	
-	int checkSetAndDraw(int playerpos) {
+	static int checkSetAndDraw(int playerpos) {
 		//set the player position
 		g.setPlayer(playerpos);
 		//draw the grid
 		g.drawGrid();
-		//if the game is over return 1
-		if (g.gameStatus() != 0) { return 1; }
+		if (USEGUI) {
+			gui.update();
+		}
+		//if the game is over...
+		if (g.gameStatus() != 0) {
+			if (USEGUI) {
+				//exit GUI
+				gui.exitProgramm(0);
+			}
+			//exit TUI
+			return 1;
+		}
 		//print instructions if game isn't over
 		printInstructions();
 		return 0;
 	}
 	
 	
-	public int run(String s) {
+	public static int run(String s) {
 		if (s.charAt(0) == 'q') {
 			println("quit");
+			if (USEGUI) {
+				gui.exitProgramm(0);
+			}
 			return 1;
 		}
 		
 		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
+			direction = 2;
 			return checkSetAndDraw(g.getPlayer() - 1);
 		}
 		
 		//move right
 		if (s.charAt(0) == 'd') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) { return -1; }
+			direction = 3;
 			return checkSetAndDraw(g.getPlayer() + 1);
 		}
 
 		//move up
 		if (s.charAt(0) == 'w') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) { return -1; }
+			direction = 0;
 			return checkSetAndDraw(g.getPlayer() - g.getWidth());
 		}
 
 		//move down
 		if (s.charAt(0) == 's') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) { return -1; }
+			direction = 1;
 			return checkSetAndDraw(g.getPlayer() + g.getWidth());
 		}	
 		
 		return 0;
 	}
 		
-	public int run() {
+	public static int run() {
 		//read the ASCII input from the console
 		Scanner scanner = new Scanner(System.in);
 		String s = scanner.next();

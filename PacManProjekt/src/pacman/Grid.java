@@ -41,15 +41,24 @@ public class Grid {
 	
 	private void createLabyrinth() {
 		for (int i = 1; i < width - 1; i++) {
+			if (width % i == 0) {
+				continue;
+			}
 			placeWall(i + width);
 		}
 		
 		for (int i = 2; i < height - 1; i++) {
+			if (height % (i * 2) == 0) {
+				continue;
+			}
 			placeWall(i * width + 1);
 		}
 		
 		for (int j = THREE; j < height; j+=2) {
 			for (int i = THREE; i < width - 1; i++) {
+				if (i % (j % 10 + 1) == 0) {
+					continue;
+				}
 				placeWall(i + width * j);
 			}
 		}
@@ -123,6 +132,21 @@ public class Grid {
 	//returns true if the field "idx" is a wall
 	public boolean isWall(int idx) {
 		if (gv.isWall(idx)) { return true; }
+		return false;
+	}
+	
+	public boolean isFood(int idx) {
+		if (gv.isFood(idx)) { return true; }
+		return false;
+	}
+	
+	public boolean isGhost(int idx) {
+		if (gv.isGhost(idx)) { return true; }
+		return false;
+	}
+	
+	public boolean isPlayer(int idx) {
+		if (gv.isPlayer(idx)) { return true; }
 		return false;
 	}
 	
