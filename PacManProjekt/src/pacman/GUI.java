@@ -10,15 +10,16 @@ import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
 	private static final int FOUR = 4, EIGHT = 8, FORTY = 40, THREEHUNDRED = 300, TENTHOUSAND = 10000;
-	int BOXSIZE = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = BOXSIZE / EIGHT;
+	private static final Color BACKGROUNDCOLOR = null;
+	private int boxsize = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = boxsize / EIGHT;
 	//up, down, left, right
-	private final int[] MOUTHDIRECTIONS = {120, 300, 210, 30};
-	private final Color WALLCOLOR = Color.BLUE, BACKGROUNDCOLOR = Color.black,
-				  FOODCOLOR = Color.WHITE, PLAYERCOLOR = Color.YELLOW;
+	private final int[] mouthDirections = {120, 300, 210, 30};
+	private final Color wallColor = Color.BLUE, backgoundColor = Color.black,
+				  foodColor = Color.WHITE, playerColor = Color.YELLOW;
 	
 	private JFrame frame;
-	private JMenuItem menu_file_help;
-	private JMenuItem menu_file_exit;
+	private JMenuItem menuFileHelp;
+	private JMenuItem menuFileExit;
 	
 	
 	public GUI() {
@@ -30,20 +31,20 @@ public class GUI extends JPanel implements ActionListener {
 	}
 	
 	private void drawWallRect(Graphics g, int idx) {
-		g.setColor(WALLCOLOR);
-		g.fillRect((idx % TUI.g.getWidth()) * BOXSIZE, (idx / TUI.g.getWidth()) * BOXSIZE, BOXSIZE - 1, BOXSIZE - 1);
+		g.setColor(wallColor);
+		g.fillRect((idx % TUI.g.getWidth()) * boxsize, (idx / TUI.g.getWidth()) * boxsize, boxsize - 1, boxsize - 1);
 	}
 	
 	private void drawFood(Graphics g, int idx) {
-		g.setColor(FOODCOLOR);
-		g.fillOval((idx % TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - foodRadius, 
-				(idx / TUI.g.getWidth()) * BOXSIZE + BOXSIZE / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
+		g.setColor(foodColor);
+		g.fillOval((idx % TUI.g.getWidth()) * boxsize + boxsize / 2 - foodRadius, 
+				(idx / TUI.g.getWidth()) * boxsize + boxsize / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
 	}
 	
 	private void drawPlayer(Graphics g, int idx) {
-		g.setColor(PLAYERCOLOR);
-		g.fillArc((idx % TUI.g.getWidth()) * BOXSIZE + 2, idx / TUI.g.getWidth() * BOXSIZE + 2,
-		BOXSIZE - FOUR, BOXSIZE - FOUR, MOUTHDIRECTIONS[TUI.getDirection()], THREEHUNDRED);
+		g.setColor(playerColor);
+		g.fillArc((idx % TUI.g.getWidth()) * boxsize + 2, idx / TUI.g.getWidth() * boxsize + 2,
+		boxsize - FOUR, boxsize - FOUR, mouthDirections[TUI.getDirection()], THREEHUNDRED);
 	}
 	
 	protected void drawGame(Graphics g) {
@@ -62,7 +63,7 @@ public class GUI extends JPanel implements ActionListener {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(BACKGROUNDCOLOR);
-		g.fillRect(0, 0, width * BOXSIZE, height * BOXSIZE);	
+		g.fillRect(0, 0, width * boxsize, height * boxsize);	
 		drawGame(g);
 	}
 	
@@ -89,10 +90,10 @@ public class GUI extends JPanel implements ActionListener {
 		JMenuBar menu = new JMenuBar();
 		JMenu file = new JMenu("Datei");
 		
-        menu_file_help = new JMenuItem("Hilfe");
-        menu_file_help.addActionListener(this);
-        menu_file_exit = new JMenuItem("Beenden");
-        menu_file_exit.addActionListener(this);
+        menuFileHelp = new JMenuItem("Hilfe");
+        menuFileHelp.addActionListener(this);
+        menuFileExit = new JMenuItem("Beenden");
+        menuFileExit.addActionListener(this);
         
         frame.addKeyListener(
 	        new KeyListener(){
@@ -114,9 +115,9 @@ public class GUI extends JPanel implements ActionListener {
         );	
         
         menu.add(file);
-        file.add(menu_file_help);
+        file.add(menuFileHelp);
         file.addSeparator();
-        file.add(menu_file_exit);      
+        file.add(menuFileExit);      
 
         frame.getContentPane().add(menu, BorderLayout.PAGE_START);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -125,8 +126,8 @@ public class GUI extends JPanel implements ActionListener {
         frame.add(new GUI());
         frame.setVisible(true);   
         
-        frame.setSize(frame.getInsets().left + frame.getInsets().right  + newwidth * BOXSIZE,
-        		frame.getInsets().top +  frame.getInsets().bottom + newheight * BOXSIZE + menu.getHeight());
+        frame.setSize(frame.getInsets().left + frame.getInsets().right  + newwidth * boxsize,
+        		frame.getInsets().top +  frame.getInsets().bottom + newheight * boxsize + menu.getHeight());
         frame.setLocationRelativeTo(null);
 	}
 	
@@ -136,12 +137,12 @@ public class GUI extends JPanel implements ActionListener {
 	
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source.equals(menu_file_help)) {
+        if (source.equals(menuFileHelp)) {
             //ToDo
             return;
         } 
         
-        if (source.equals(menu_file_exit)) {
+        if (source.equals(menuFileExit)) {
         	exitProgramm(0);
             return;
         }
