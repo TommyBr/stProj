@@ -2,10 +2,11 @@ package pacman;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-public class TUI {
+class TUI {
 	//constant variables for constant numbers > 2
+	static final int THREE = 3;
 	static final int GRIDWIDTH = 8, GRIDHEIGHT = 5, GHOSTS = 2;
-	private static boolean USEGUI = true;
+	private static boolean usegui = true;
 	protected static Grid g;
 	private static GUI gui;
 	private static int direction = 2;
@@ -16,7 +17,7 @@ public class TUI {
 		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
 		g.drawGrid();
 		
-		if (USEGUI) {
+		if (usegui) {
 			gui = new GUI();
 			gui.create(GRIDWIDTH, GRIDHEIGHT);
 		}
@@ -49,12 +50,12 @@ public class TUI {
 		g.setPlayer(playerpos);
 		//draw the grid
 		g.drawGrid();
-		if (USEGUI) {
+		if (usegui) {
 			gui.update();
 		}
 		//if the game is over...
 		if (g.gameStatus() != 0) {
-			if (USEGUI) {
+			if (usegui) {
 				//exit GUI
 				gui.exitProgramm(0);
 			}
@@ -66,16 +67,7 @@ public class TUI {
 		return 0;
 	}
 	
-	
-	public static int run(String s) {
-		if (s.charAt(0) == 'q') {
-			println("quit");
-			if (USEGUI) {
-				gui.exitProgramm(0);
-			}
-			return 1;
-		}
-		
+	private static int checkAndMove(String s) {
 		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
@@ -86,7 +78,7 @@ public class TUI {
 		//move right
 		if (s.charAt(0) == 'd') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) { return -1; }
-			direction = 3;
+			direction = THREE;
 			return checkSetAndDraw(g.getPlayer() + 1);
 		}
 
@@ -105,6 +97,18 @@ public class TUI {
 		}	
 		
 		return 0;
+	}
+	
+	public static int run(String s) {
+		if (s.charAt(0) == 'q') {
+			println("quit");
+			if (usegui) {
+				gui.exitProgramm(0);
+			}
+			return 1;
+		}	
+		
+		return checkAndMove(s);
 	}
 		
 	public static int run() {

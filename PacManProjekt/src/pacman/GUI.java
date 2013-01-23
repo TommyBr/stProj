@@ -9,15 +9,14 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
-	private int BOXSIZE = 40, WIDTH = 10000, HEIGHT = 10000, FOODRADIUS = BOXSIZE / 8;
+	private static final int FOUR = 4, EIGHT = 8, FORTY = 40, THREEHUNDRED = 300, TENTHOUSAND = 10000;
+	private int BOXSIZE = FORTY, WIDTH = TENTHOUSAND, HEIGHT = TENTHOUSAND, FOODRADIUS = BOXSIZE / EIGHT;
 	//up, down, left, right
 	private final int[] MOUTHDIRECTIONS = {120, 300, 210, 30};
 	private Color WALLCOLOR = Color.BLUE, BACKGROUNDCOLOR = Color.black,
 				  FOODCOLOR = Color.WHITE, PLAYERCOLOR = Color.YELLOW;
 	
 	private JFrame frame;
-	private JMenuBar menu;
-	private JMenu file;
 	private JMenuItem menu_file_help;
 	private JMenuItem menu_file_exit;
 	
@@ -44,7 +43,7 @@ public class GUI extends JPanel implements ActionListener {
 	private void drawPlayer(Graphics g, int idx) {
 		g.setColor(PLAYERCOLOR);
 		g.fillArc((idx % TUI.g.getWidth()) * BOXSIZE + 2, idx / TUI.g.getWidth() * BOXSIZE + 2,
-		BOXSIZE - 4, BOXSIZE - 4, MOUTHDIRECTIONS[TUI.getDirection()], 300);
+		BOXSIZE - FOUR, BOXSIZE - FOUR, MOUTHDIRECTIONS[TUI.getDirection()], THREEHUNDRED);
 	}
 	
 	protected void drawGame(Graphics g) {
@@ -67,35 +66,39 @@ public class GUI extends JPanel implements ActionListener {
 		drawGame(g);
 	}
 	
+	private void checkPressedKey(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
+			TUI.run("w");
+		} else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
+			TUI.run("a");
+		} else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
+			TUI.run("s");
+		} else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			TUI.run("d");
+		}  else if (e.getKeyCode() == KeyEvent.VK_Q) {
+			TUI.run("q");
+		}	
+	}
+	
 	protected void create(int width, int height) {
 		WIDTH = width;
 		HEIGHT = height;
 		frame = new JFrame();
 		frame.setTitle("PacMan");
 		
-        menu = new JMenuBar();
-        file = new JMenu("Datei");        
+		JMenuBar menu = new JMenuBar();
+		JMenu file = new JMenu("Datei");
+		
         menu_file_help = new JMenuItem("Hilfe");
         menu_file_help.addActionListener(this);
         menu_file_exit = new JMenuItem("Beenden");
         menu_file_exit.addActionListener(this);
         
-
         frame.addKeyListener(
 	        new KeyListener(){
 				@Override
 				public void keyPressed(KeyEvent e) {
-					if (e.getKeyCode() == KeyEvent.VK_W || e.getKeyCode() == KeyEvent.VK_UP) {
-						TUI.run("w");
-					} else if (e.getKeyCode() == KeyEvent.VK_A || e.getKeyCode() == KeyEvent.VK_LEFT) {
-						TUI.run("a");
-					} else if (e.getKeyCode() == KeyEvent.VK_S || e.getKeyCode() == KeyEvent.VK_DOWN) {
-						TUI.run("s");
-					} else if (e.getKeyCode() == KeyEvent.VK_D || e.getKeyCode() == KeyEvent.VK_RIGHT) {
-						TUI.run("d");
-					}  else if (e.getKeyCode() == KeyEvent.VK_Q) {
-						TUI.run("q");
-					}
+					checkPressedKey(e);
 				}
 
 				@Override
@@ -108,8 +111,7 @@ public class GUI extends JPanel implements ActionListener {
 					//not required
 				}
 	        }
-        );
-		
+        );	
         
         menu.add(file);
         file.add(menu_file_help);
@@ -134,12 +136,12 @@ public class GUI extends JPanel implements ActionListener {
 	
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (source == menu_file_help) {
+        if (source.equals(menu_file_help)) {
             //ToDo
             return;
         } 
         
-        if (source == menu_file_exit) {
+        if (source.equals(menu_file_exit)) {
         	exitProgramm(0);
             return;
         }

@@ -1,7 +1,7 @@
 package pacman;
 public class Grid {
 	//constant variables for constant numbers > 2
-	static final int THREE = 3, THOUSAND = 1000;
+	static final int THREE = 3, TEN = 10, THOUSAND = 1000;
 	private static int width, height, player, ghosts;
 	private static GridValues gv;
 	private Ghost ghost[];
@@ -56,7 +56,7 @@ public class Grid {
 		
 		for (int j = THREE; j < height; j+=2) {
 			for (int i = THREE; i < width - 1; i++) {
-				if (i % (j % 10 + 1) == 0) {
+				if (i % (j % TEN + 1) == 0) {
 					continue;
 				}
 				placeWall(i + width * j);
