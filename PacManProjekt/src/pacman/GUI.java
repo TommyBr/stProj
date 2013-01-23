@@ -14,7 +14,7 @@ public class GUI extends JPanel implements ActionListener {
 	private int boxsize = FORTY, width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = boxsize / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
-	private final Color wallColor = Color.BLUE, backgoundColor = Color.black,
+	final Color wallColor = Color.BLUE, backgoundColor = Color.black,
 				  foodColor = Color.WHITE, playerColor = Color.YELLOW;
 	
 	private JFrame frame;
@@ -32,28 +32,28 @@ public class GUI extends JPanel implements ActionListener {
 	
 	private void drawWallRect(Graphics g, int idx) {
 		g.setColor(wallColor);
-		g.fillRect((idx % TUI.g.getWidth()) * boxsize, (idx / TUI.g.getWidth()) * boxsize, boxsize - 1, boxsize - 1);
+		g.fillRect((idx % TUI.getGrid().getWidth()) * boxsize, (idx / TUI.getGrid().getWidth()) * boxsize, boxsize - 1, boxsize - 1);
 	}
 	
 	private void drawFood(Graphics g, int idx) {
 		g.setColor(foodColor);
-		g.fillOval((idx % TUI.g.getWidth()) * boxsize + boxsize / 2 - foodRadius, 
-				(idx / TUI.g.getWidth()) * boxsize + boxsize / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
+		g.fillOval((idx % TUI.getGrid().getWidth()) * boxsize + boxsize / 2 - foodRadius, 
+				(idx / TUI.getGrid().getWidth()) * boxsize + boxsize / 2 - foodRadius, foodRadius * 2, foodRadius * 2);
 	}
 	
 	private void drawPlayer(Graphics g, int idx) {
 		g.setColor(playerColor);
-		g.fillArc((idx % TUI.g.getWidth()) * boxsize + 2, idx / TUI.g.getWidth() * boxsize + 2,
+		g.fillArc((idx % TUI.getGrid().getWidth()) * boxsize + 2, idx / TUI.getGrid().getWidth() * boxsize + 2,
 		boxsize - FOUR, boxsize - FOUR, mouthDirections[TUI.getDirection()], THREEHUNDRED);
 	}
 	
 	protected void drawGame(Graphics g) {
-		for (int i = 0; i < TUI.g.getWidth() * TUI.g.getHeight(); i++) {
-			if (TUI.g.isWall(i)) {
+		for (int i = 0; i < TUI.getGrid().getWidth() * TUI.getGrid().getHeight(); i++) {
+			if (TUI.getGrid().isWall(i)) {
 				drawWallRect(g, i);
-			} else if (TUI.g.isFood(i)) {
+			} else if (TUI.getGrid().isFood(i)) {
 				drawFood(g, i);
-			} else if (TUI.g.isPlayer(i)) {
+			} else if (TUI.getGrid().isPlayer(i)) {
 				drawPlayer(g, i);
 			}
 		}		

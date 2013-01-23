@@ -7,11 +7,11 @@ class TUI {
 	static final int THREE = 3;
 	static final int GRIDWIDTH = 8, GRIDHEIGHT = 5, GHOSTS = 2;
 	private static boolean usegui = true;
-	protected static Grid g;
+	private static Grid g;
 	private static GUI gui;
 	private static int direction = 2;
 	
-	public TUI() {
+	protected TUI() {
 		println("PacMan gestartet");
 		g = new Grid();
 		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
@@ -25,6 +25,10 @@ class TUI {
 	
 	public static int getDirection() {
 		return direction;
+	}
+	
+	protected static Grid getGrid() {
+		return g;
 	}
 	
 	static boolean moveIsAllowed(int from, int to) {	
