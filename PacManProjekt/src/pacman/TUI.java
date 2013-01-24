@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 class TUI {
 	//constant variables for the grid size
-	static final int GRIDWIDTH = 30, GRIDHEIGHT = 18;
+	static final int GRIDWIDTH = 24, GRIDHEIGHT = 14;
 	//and constant numbers > 2
 	static final int THREE = 3, SIXTY = 60, NUMBEROFGHOSTS = GRIDWIDTH * GRIDHEIGHT / SIXTY + 1;
 	//and other global variables
-	private static boolean usegui = true;
+	private static boolean usegui = true, run = true;
 	private static Grid g;
 	private static GUI gui;
 	private static int direction = 2;
@@ -20,10 +20,16 @@ class TUI {
 		g.initGrid(GRIDWIDTH, GRIDHEIGHT, NUMBEROFGHOSTS);
 		g.drawGrid();
 		
+		//create gui
 		if (usegui) {
 			gui = new GUI();
 			gui.create(GRIDWIDTH, GRIDHEIGHT);
 		}
+	}
+	
+	//returns false if game done
+	void setRun(boolean runstatus) {
+		run = runstatus;
 	}
 	
 	//returns the last direction
@@ -62,14 +68,26 @@ class TUI {
 		if (usegui) {
 			gui.update();
 		}
+		
 		//if the game is over...
-		if (g.gameStatus() != 0) {
+		int gamestatus = g.gameStatus();
+		if (gamestatus != 0) {
+			run = false;
 			if (usegui) {
-				//exit GUI
-				gui.exitProgram(0);
+				//exit GUI if done or game over
+				//gui.exitProgram(0);
 			}
-			//exit TUI
-			return 1;
+			
+			//game over
+			if (gamestatus < 0) {
+				gui.setFrameTitel("PacMan      Du Wurdest vom Geist gefangen! Spielende.");
+			} else {
+				//player win
+				gui.setFrameTitel("PacMan      Du hast es geschaft alles in " + g.getMovements() + " Zügen aufzuessen! Spielende.");
+			}
+			
+			//return 1 = exit TUI
+			return 0;
 		}
 		//print instructions if game isn't over
 		printInstructions();
@@ -122,7 +140,7 @@ class TUI {
 			}
 			return 1;
 		}	
-		
+		if (!run) return 0;
 		return checkAndMove(s);
 	}
 		
@@ -146,6 +164,8 @@ class TUI {
 	
 	static void printStatistic() {
 		println("Gegessen: " + g.getEaten() + "\t\tVerbleibend: " + g.getFoodLeft() + "\t\tZüge: " + g.getMovements());
+		gui.setFrameTitel("PacMan      " + "Gegessen: " + g.getEaten() + "   Verbleibend: " + g.getFoodLeft() + "   Züge: " + g.getMovements());
+		
 	}
 	
 	//System.out.print replacement to prevent violations

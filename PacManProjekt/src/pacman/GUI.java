@@ -10,7 +10,8 @@ import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
 	private static final int THREE = 3, FOUR = 4, EIGHT = 8, BOXSIZE = 50, ONEHUNDREDNINETY = 190, THREEHUNDRED = 300, TENTHOUSAND = 10000;
-	private static final double ZEROONE = 0.1, ZEROFINTEEN = 0.15, ZEROFOURTYFIVE = 0.45, ZEROTHREE = 0.3, ZEROFOUR = 0.4, ZEROSIX = 0.6;
+	private static final double ZEROONE = 0.1, ZEROFINTEEN = 0.15, ZEROTWO = 0.2;
+	private static final double ZEROFOURTYFIVE = 0.45, ZEROTHREE = 0.3, ZEROFOUR = 0.4, ZEROSIX = 0.6;
 	private int width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = BOXSIZE / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
@@ -27,6 +28,10 @@ public class GUI extends JPanel implements ActionListener {
 	//allowing other classes to refresh the frame
 	protected void update() {
 		frame.repaint();
+	}
+	
+	protected void setFrameTitel(String titel) {
+		frame.setTitle(titel);
 	}
 	
 	//draw wall to the frame
@@ -73,7 +78,14 @@ public class GUI extends JPanel implements ActionListener {
 	private void drawGhost(Graphics g, int idx) {
 		g.setColor(Color.RED);
 		g.fillArc((idx % TUI.getGrid().getWidth()) * BOXSIZE + 2, idx / TUI.getGrid().getWidth() * BOXSIZE + 2,
-		BOXSIZE - FOUR, BOXSIZE - FOUR, mouthDirections[TUI.getDirection()], THREEHUNDRED);	
+		BOXSIZE - FOUR, BOXSIZE - FOUR, 0, 360);	
+		
+		//give eyes
+		g.setColor(Color.BLACK);
+		g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROTWO), 
+				(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROTHREE), foodRadius * 2, foodRadius * 2);
+		g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROSIX), 
+				(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROTHREE), foodRadius * 2, foodRadius * 2);
 	}
 	
 	//controls the drawing to the frame
