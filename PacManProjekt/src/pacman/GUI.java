@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
-	private static final int THREE = 3, FOUR = 4, EIGHT = 8, BOXSIZE = 50, THREEHUNDRED = 300, TENTHOUSAND = 10000;
+	private static final int THREE = 3, FOUR = 4, EIGHT = 8, BOXSIZE = 50, ONEHUNDREDNINETY = 190, THREEHUNDRED = 300, TENTHOUSAND = 10000;
+	private static final double ZEROONE = 0.1, ZEROFINTEEN = 0.15, ZEROFOURTYFIVE = 0.45, ZEROTHREE = 0.3, ZEROFOUR = 0.4, ZEROSIX = 0.6;
 	private int width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = BOXSIZE / EIGHT;
 	//up, down, left, right
 	private final int[] mouthDirections = {120, 300, 210, 30};
@@ -51,20 +52,20 @@ public class GUI extends JPanel implements ActionListener {
 		g.setColor(Color.BLACK);
 		if (TUI.getDirection() == 2) {
 			//left
-			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.3), 
-					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.1), foodRadius * 2, foodRadius * 2);
+			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROTHREE), 
+					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROONE), foodRadius * 2, foodRadius * 2);
 		} else if (TUI.getDirection() == THREE) {
 			//right
-			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.45), 
-					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.1), foodRadius * 2, foodRadius * 2);
+			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROFOURTYFIVE), 
+					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROONE), foodRadius * 2, foodRadius * 2);
 		} else if (TUI.getDirection() == 0) {
 			//up
-			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.15), 
-					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.3), foodRadius * 2, foodRadius * 2);
+			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROFINTEEN), 
+					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROTHREE), foodRadius * 2, foodRadius * 2);
 		} else if (TUI.getDirection() == 1) {
 			//down
-			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.6), 
-					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * 0.4), foodRadius * 2, foodRadius * 2);
+			g.fillOval((idx % TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROSIX), 
+					(idx / TUI.getGrid().getWidth()) * BOXSIZE + (int)(BOXSIZE * ZEROFOUR), foodRadius * 2, foodRadius * 2);
 		}
 	}
 	
@@ -217,7 +218,7 @@ public class GUI extends JPanel implements ActionListener {
 		//show the frame
 		helpFrame.setVisible(true);  
 		//set the frame
-		helpFrame.setSize(300, 190);
+		helpFrame.setSize(THREEHUNDRED, ONEHUNDREDNINETY);
 		//center the frame
 		helpFrame.setLocationRelativeTo(null);	
 	}

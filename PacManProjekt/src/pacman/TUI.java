@@ -3,12 +3,11 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 class TUI {
-	//constant variables for constant numbers > 2
-	static final int THREE = 3;
-	//and for the grid size
+	//constant variables for the grid size
 	static final int GRIDWIDTH = 30, GRIDHEIGHT = 18;
+	//and constant numbers > 2
+	static final int THREE = 3, NUMBEROFGHOSTS = GRIDWIDTH * GRIDHEIGHT / 60 + 1;
 	//and other global variables
-	private int numberOfGhosts = 2;
 	private static boolean usegui = true;
 	private static Grid g;
 	private static GUI gui;
@@ -17,8 +16,8 @@ class TUI {
 	protected TUI() {
 		println("PacMan gestartet");
 		g = new Grid();
-		numberOfGhosts = GRIDWIDTH * GRIDHEIGHT / 50 + 1;
-		g.initGrid(GRIDWIDTH, GRIDHEIGHT, numberOfGhosts);
+		//init the grid and calc and set number of ghosts
+		g.initGrid(GRIDWIDTH, GRIDHEIGHT, NUMBEROFGHOSTS);
 		g.drawGrid();
 		
 		if (usegui) {
