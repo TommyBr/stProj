@@ -1,9 +1,11 @@
 package pacman;
+
 public class Grid {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3, TEN = 10, THOUSAND = 1000;
 	private static int width, height, player, ghosts;
 	private static GridValues gv;
+	private static TUIDrawing tuiDrawing;
 	private Ghost ghost[];
 	//number of eaten food (clear fields)
 	private static int eaten, foodleft, movements;
@@ -15,6 +17,11 @@ public class Grid {
 		//no move done
 		movements = 0;
 		gv = new GridValues();
+		tuiDrawing = new TUIDrawing();
+	}
+	
+	void drawGrid() {
+		tuiDrawing.drawGrid(width, height, gv);
 	}
 	
 	static GridValues getGridValue() {
@@ -209,51 +216,6 @@ public class Grid {
 		}
 		
 		return 0;
-	}
-	
-	public int drawGrid() {
-		//number of the current field that will be draw
-		int fieldNr = 0;
-		
-		for (int i = 0; i <= height * 2; i++) {
-			//left wall in each line of the grid
-			TUI.print("|");
-			if (i % 2 == 0) {
-				//printing the top / bottom border of the fields
-				drawTopBottom();
-			} else {
-				//printing the fields with her content
-				for (int j = 0; j < width; j++) {
-					drawFieldContent(fieldNr++);
-					if (j < width - 1) { TUI.print("|"); }
-					//increase the field number and do the same for the next field
-				}	
-			}
-			//right wall in each line of the grid
-			TUI.println("|");
-		}
-		
-		return 0;
-	}
-	
-	void drawTopBottom() {
-		for (int j = 0; j < width; j++) {
-			if (j < width - 1) { TUI.print("----"); }
-			else { TUI.print("---"); }
-		}	
-	}
-	
-	void drawFieldContent(int fieldNr) {
-		//player
-		if (gv.isPlayer(fieldNr)) { TUI.print(" P "); }
-		//ghost
-		else if (gv.isGhost(fieldNr)) { TUI.print(" G "); }
-		//wall
-		else if (gv.isWall(fieldNr)) { TUI.print(" x "); }
-		//food
-		else if (gv.isFood(fieldNr)) { TUI.print(" . "); }	
-		//nothing
-		else { TUI.print("   "); }
 	}
 
 }

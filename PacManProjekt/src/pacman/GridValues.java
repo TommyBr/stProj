@@ -14,10 +14,11 @@ public final class GridValues {
 		food = new boolean[count];
 		
 		for (int i = 0; i < count; i++) {
+			//at the beginning, no place are a ghost, player or a wall
 			ghost[i] = false;
 			player[i] = false;
 			isWall[i] = false;
-			//at the beginning, all places are food
+			//but all places are food
 			food[i] = true;
 		}
 	}
