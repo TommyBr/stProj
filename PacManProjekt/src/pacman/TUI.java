@@ -6,7 +6,7 @@ class TUI {
 	//constant variables for the grid size
 	static final int GRIDWIDTH = 30, GRIDHEIGHT = 18;
 	//and constant numbers > 2
-	static final int THREE = 3, NUMBEROFGHOSTS = GRIDWIDTH * GRIDHEIGHT / 60 + 1;
+	static final int THREE = 3, SIXTY = 60, NUMBEROFGHOSTS = GRIDWIDTH * GRIDHEIGHT / SIXTY + 1;
 	//and other global variables
 	private static boolean usegui = true;
 	private static Grid g;
