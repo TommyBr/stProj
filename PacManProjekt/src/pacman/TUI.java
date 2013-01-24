@@ -5,7 +5,10 @@ import java.util.Scanner;
 class TUI {
 	//constant variables for constant numbers > 2
 	static final int THREE = 3;
-	static final int GRIDWIDTH = 8, GRIDHEIGHT = 5, GHOSTS = 2;
+	//and for the grid size
+	static final int GRIDWIDTH = 30, GRIDHEIGHT = 18;
+	//and other global variables
+	private int numberOfGhosts = 2;
 	private static boolean usegui = true;
 	private static Grid g;
 	private static GUI gui;
@@ -14,7 +17,8 @@ class TUI {
 	protected TUI() {
 		println("PacMan gestartet");
 		g = new Grid();
-		g.initGrid(GRIDWIDTH, GRIDHEIGHT, GHOSTS);
+		numberOfGhosts = GRIDWIDTH * GRIDHEIGHT / 50 + 1;
+		g.initGrid(GRIDWIDTH, GRIDHEIGHT, numberOfGhosts);
 		g.drawGrid();
 		
 		if (usegui) {
@@ -63,7 +67,7 @@ class TUI {
 		if (g.gameStatus() != 0) {
 			if (usegui) {
 				//exit GUI
-				gui.exitProgramm(0);
+				gui.exitProgram(0);
 			}
 			//exit TUI
 			return 1;
@@ -115,7 +119,7 @@ class TUI {
 		if (s.charAt(0) == 'q') {
 			println("quit");
 			if (usegui) {
-				gui.exitProgramm(0);
+				gui.exitProgram(0);
 			}
 			return 1;
 		}	
