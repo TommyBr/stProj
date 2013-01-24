@@ -73,10 +73,6 @@ class TUI {
 		int gamestatus = g.gameStatus();
 		if (gamestatus != 0) {
 			run = false;
-			if (usegui) {
-				//exit GUI if done or game over
-				//gui.exitProgram(0);
-			}
 			
 			//game over
 			if (gamestatus < 0) {
@@ -86,7 +82,6 @@ class TUI {
 				gui.setFrameTitel("PacMan      Du hast es geschaft alles in " + g.getMovements() + " Zügen aufzuessen! Spielende.");
 			}
 			
-			//return 1 = exit TUI
 			return 0;
 		}
 		//print instructions if game isn't over
@@ -140,7 +135,7 @@ class TUI {
 			}
 			return 1;
 		}	
-		if (!run) return 0;
+		if (!run) { return 0; }
 		return checkAndMove(s);
 	}
 		

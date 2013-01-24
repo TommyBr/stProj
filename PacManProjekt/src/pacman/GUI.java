@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 	  
 public class GUI extends JPanel implements ActionListener {
-	private static final int THREE = 3, FOUR = 4, EIGHT = 8, BOXSIZE = 50, ONEHUNDREDNINETY = 190, THREEHUNDRED = 300, TENTHOUSAND = 10000;
+	private static final int THREE = 3, FOUR = 4, EIGHT = 8, BOXSIZE = 50, ONEHUNDREDNINETY = 190, THREEHUNDRED = 300;
+	private static final int THREEHUNDREDSIXTY = 360, TENTHOUSAND = 10000;
 	private static final double ZEROONE = 0.1, ZEROFINTEEN = 0.15, ZEROTWO = 0.2;
 	private static final double ZEROFOURTYFIVE = 0.45, ZEROTHREE = 0.3, ZEROFOUR = 0.4, ZEROSIX = 0.6;
 	private int width = TENTHOUSAND, height = TENTHOUSAND, foodRadius = BOXSIZE / EIGHT;
@@ -78,7 +79,7 @@ public class GUI extends JPanel implements ActionListener {
 	private void drawGhost(Graphics g, int idx) {
 		g.setColor(Color.RED);
 		g.fillArc((idx % TUI.getGrid().getWidth()) * BOXSIZE + 2, idx / TUI.getGrid().getWidth() * BOXSIZE + 2,
-		BOXSIZE - FOUR, BOXSIZE - FOUR, 0, 360);	
+		BOXSIZE - FOUR, BOXSIZE - FOUR, 0, THREEHUNDREDSIXTY);	
 		
 		//give eyes
 		g.setColor(Color.BLACK);
