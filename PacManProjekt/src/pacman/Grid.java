@@ -46,6 +46,7 @@ public class Grid {
 		foodleft--;
 	}
 	
+	//create the walls of the labyrinth
 	private void createLabyrinth() {
 		for (int i = 1; i < width - 1; i++) {
 			if (width % i == 0) {
@@ -71,9 +72,11 @@ public class Grid {
 		}
 	}
 	
+	//return a random field number
 	int getRandomField() {
 		return (int)((Math.random() * width * height * THOUSAND) % (width * height));
 	}
+	
 	
 	void initGhosts(int numberOfGhosts) {
 		ghosts = numberOfGhosts;
@@ -142,16 +145,19 @@ public class Grid {
 		return false;
 	}
 	
+	//returns true if the field "idx" is food
 	public boolean isFood(int idx) {
 		if (gv.isFood(idx)) { return true; }
 		return false;
 	}
 	
+	//returns true if the field "idx" is a ghost
 	public boolean isGhost(int idx) {
 		if (gv.isGhost(idx)) { return true; }
 		return false;
 	}
 	
+	//returns true if the player position is "idx"
 	public boolean isPlayer(int idx) {
 		if (gv.isPlayer(idx)) { return true; }
 		return false;
@@ -189,6 +195,7 @@ public class Grid {
 		return player;
 	}
 	
+	//returns the position of ghost #idx
 	int getGhost(int idx) {
 		return ghost[idx].getPos();
 	}

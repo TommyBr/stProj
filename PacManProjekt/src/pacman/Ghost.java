@@ -9,10 +9,12 @@ public final class Ghost {
 		directory = -1;
 	}
 	
+	//returns the global directory
 	int getDirectory() {
 		return directory;
 	}
 	
+	//sets the global directory
 	void setDirectory(int dir) {
 		directory = dir;
 	}

@@ -23,10 +23,12 @@ class TUI {
 		}
 	}
 	
+	//returns the last direction
 	public static int getDirection() {
 		return direction;
 	}
 	
+	//allow access private grid
 	protected static Grid getGrid() {
 		return g;
 	}
@@ -75,6 +77,7 @@ class TUI {
 		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
+			//update the mouth position for PacMan in GUI
 			direction = 2;
 			return checkSetAndDraw(g.getPlayer() - 1);
 		}
@@ -82,6 +85,7 @@ class TUI {
 		//move right
 		if (s.charAt(0) == 'd') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + 1)) { return -1; }
+			//update the mouth position for PacMan in GUI
 			direction = THREE;
 			return checkSetAndDraw(g.getPlayer() + 1);
 		}
@@ -89,6 +93,7 @@ class TUI {
 		//move up
 		if (s.charAt(0) == 'w') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - g.getWidth())) { return -1; }
+			//update the mouth position for PacMan in GUI
 			direction = 0;
 			return checkSetAndDraw(g.getPlayer() - g.getWidth());
 		}
@@ -96,6 +101,7 @@ class TUI {
 		//move down
 		if (s.charAt(0) == 's') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() + g.getWidth())) { return -1; }
+			//update the mouth position for PacMan in GUI
 			direction = 1;
 			return checkSetAndDraw(g.getPlayer() + g.getWidth());
 		}	
@@ -103,7 +109,9 @@ class TUI {
 		return 0;
 	}
 	
+	
 	public static int run(String s) {
+		//if q was pressed, tui and gui exits
 		if (s.charAt(0) == 'q') {
 			println("quit");
 			if (usegui) {
@@ -125,23 +133,25 @@ class TUI {
 	static void printInstructions() {
 		/*
 		 	Instruction for the user to play the game.
-		 	The following lines will be printed after every move done by the user.
+		 	The following lines will printed after every move done by the user.
 		*/
 		printStatistic();
 		println("P = PacMan, G = Geist, x = Wand");
 		println("Befehle: q = quit, Bewegen: w = hoch, a = links, s = runter, d = rechts");
 	}
 	
+	
 	static void printStatistic() {
 		println("Gegessen: " + g.getEaten() + "\t\tVerbleibend: " + g.getFoodLeft() + "\t\tZüge: " + g.getMovements());
 	}
 	
-
+	//System.out.print replacement to prevent violations
 	static void print(String s) {
 		PrintStream out = System.out;
 		out.print(s);
 	}
 	
+	//System.out.println replacement to prevent violations
 	static void println(String s) {
 		print(s + "\n");
 	}

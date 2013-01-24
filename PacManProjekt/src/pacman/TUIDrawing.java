@@ -2,6 +2,7 @@ package pacman;
 
 public class TUIDrawing {
 	
+	//draws the grid
 	public int drawGrid(int width, int height, GridValues gv) {
 		//number of the current field that will be draw
 		int fieldNr = 0;
@@ -27,6 +28,7 @@ public class TUIDrawing {
 		return 0;
 	}
 	
+	//this functions prints the top and bottom line of the grid to the console
 	void drawTopBottom(int width) {
 		for (int j = 0; j < width; j++) {
 			if (j < width - 1) { TUI.print("----"); }
@@ -34,6 +36,7 @@ public class TUIDrawing {
 		}	
 	}
 	
+	//printing the grid content to the console
 	void drawFieldContent(int fieldNr, GridValues gv) {
 		//player
 		if (gv.isPlayer(fieldNr)) { TUI.print(" P "); }
