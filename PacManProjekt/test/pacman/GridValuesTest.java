@@ -45,35 +45,5 @@ public class GridValuesTest {
 		gv.setPlayer(0, false);
 		assertFalse(gv.isPlayer(0));
 	}
-/*
-	@Test
-	public final void testIsWall() {
-		fail("Not yet implemented"); // TODO
-	}
 
-	@Test
-	public final void testIsFood() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetGhost() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetPlayer() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetWall() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testSetFood() {
-		fail("Not yet implemented"); // TODO
-	}
-*/
 }

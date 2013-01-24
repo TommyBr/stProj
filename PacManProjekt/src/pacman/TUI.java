@@ -71,7 +71,7 @@ class TUI {
 		return 0;
 	}
 	
-	private static int checkAndMove(String s) {
+	static int checkAndMove(String s) {
 		//move left
 		if (s.charAt(0) == 'a') {
 			if (!moveIsAllowed(g.getPlayer(), g.getPlayer() - 1)) { return -1; }
