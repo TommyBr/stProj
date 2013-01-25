@@ -88,7 +88,9 @@ public class Grid {
 			ghost[i] = new Ghost();
 			//searching for an another random field that is not in use
 			r = getRandomField();
-			while (!gv.fieldIsEmpty(r)) { r = getRandomField(); }
+			int whilecnt = 0;
+			//but stop after width x height x 10 trys
+			while (!gv.fieldIsEmpty(r) && ++whilecnt < width * height * TEN) { r = getRandomField(); }
 			//mark it as ghost
 			gv.setGhost(r, true);
 			//update the ghost position
@@ -110,8 +112,9 @@ public class Grid {
 		createLabyrinth();
 		
 		//searching for a random field that is not in use
-		int r = getRandomField();
-		while (!gv.fieldIsEmpty(r)) { r = getRandomField(); }
+		int r = getRandomField(), whilecnt = 0;
+		//but stop after width x height x 10 trys
+		while (!gv.fieldIsEmpty(r) && ++whilecnt < width * height * TEN) { r = getRandomField(); }
 		//mark it as non-food
 		gv.setFood(r, false);
 		foodleft--;

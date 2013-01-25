@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 class TUI {
 	//constant variables for the grid size
-	static final int GRIDWIDTH = 24, GRIDHEIGHT = 14;
+	static final int GRIDWIDTH = 18, GRIDHEIGHT = 10;
 	//and constant numbers > 2
 	static final int THREE = 3, SIXTY = 60, NUMBEROFGHOSTS = GRIDWIDTH * GRIDHEIGHT / SIXTY + 1;
 	//and other global variables
