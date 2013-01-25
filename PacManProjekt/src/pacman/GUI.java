@@ -77,7 +77,7 @@ public class GUI extends JPanel implements ActionListener {
 	
 	//draw ghost/s to the frame
 	private void drawGhost(Graphics g, int idx) {
-		g.setColor(Color.RED);
+		g.setColor(Color.GRAY);
 		g.fillArc((idx % TUI.getGrid().getWidth()) * BOXSIZE + 2, idx / TUI.getGrid().getWidth() * BOXSIZE + 2,
 		BOXSIZE - FOUR, BOXSIZE - FOUR, 0, THREEHUNDREDSIXTY);	
 		
